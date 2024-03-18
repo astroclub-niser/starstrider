@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 2 | STARSTRIDER</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bona+Nova:wght@400;700&family=Space+Mono:wght@700&display=swap');
+        body {
+            font-family: 'Bona Nova', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position:relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        canvas {
+            position: absolute;
+            top:0;
+            left: 0;
+            right:0;
+            bottom:0;
+            height: 100%;
+            width:100%;
+            z-index: -1;
+        }
+        .container {
+            padding: 2rem 1rem;
+            width:100%;
+            max-width: 800px;
+            text-align: justify;
+            color: #fff;
+            font-size: 18px;
+        }
+        .team-stats {
+            position: absolute;
+            top:20px;
+            right: 20px;
+        }
+        h1 {
+            font-family: "Space Mono", monospace;
+            font-weight: 700;
+        }
+        .align-center, h1 {
+            text-align: center;   
+        }
+        input[type=text], select {
+            width: 300px;
+            padding: 5px 5px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button[type=submit] {
+            width: 100px;
+            background-color: #371f76;
+            color: white;
+            padding: 10px 15px;
+            margin: 8px 0 0 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body oncontextmenu="return false;">
+{% macro Q1() -%}
+    <div class='question' id='question1'>
+        <h1>Question 1</h1>
+    </div>
+{%- endmacro %}
+
+{% macro Q2() -%}
+    <div class='question' id='question2'>
+        <h1>Question 2</h1>
+ </div>
+{%- endmacro %}
+
+{% macro Q4() -%}
+    <div class='question' id='question4'>
+        <h1>Question 4</h1>
+</div>
+{%- endmacro %}
+
+{% macro Q5() -%}
+    <div class='question' id='question5'>
+        <h1>Question 5</h1>
+</div>
+{%- endmacro %}
+
+{% macro Q3() -%}
+    <div class='question' id='question3'>
+        <h1>Question 3</h1>
+</div>
+{%- endmacro %}
+
+{% macro Q6() -%}
+    <div class='question' id='question6'>
+        <h1>Question 6</h1>
+</div>
+{%- endmacro %}
+
+{% macro form() -%}
+    <form method="POST" class="align-center">
+        <div class="form-group">
+            <label for="answer"><b>Answer:</b></label>
+            <input type="text" name="answer" id="answer" required>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{%- endmacro %}
+
+<canvas></canvas>
+
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <script>
+      var messages = {{ messages | safe }};
+      for (var i=0; i<messages.length; i++) {
+        alert(messages[i]);
+      }
+    </script>
+  {% endif %}
+{% endwith %}
+
+        <div class="team-stats">
+        <button onclick="location.href='{{url_for("logout")}}'">Logout</button><br/>
+        {{team_name}}@Q{{team_position}}
+        </div>
+
+        {% if team_position == 1 %}
+            {{ Q1() }}
+            {{ form() }}
+        {% elif team_position == 2 %}
+            {{ Q2() }}
+            {{ form() }}
+        {% elif team_position == 3 %}
+            {{ Q3() }}
+            {{ form() }}
+        {% elif team_position == 4 %}
+            {{ Q4() }}
+            {{ form() }}
+        {% elif team_position == 5 %}
+            {{ Q5() }}
+            {{ form() }}
+        {% elif team_position == 6 %}
+            {{ Q6() }}
+            {{ form() }}
+        {% elif team_position == 7 %}
+            <div class='question' id='finish'>
+                <h1>Finish</h1>
+                <p>You have successfully reached home base.</p>
+                <button onclick="location.href='{{url_for("logout")}}'">Logout</button>
+            </div>
+        {% else %}
+            An error occured. Please logout and login again to continue.
+        {% endif %}
+
+        
+    </div>
+    <script>
+        document.onkeydown = function(e) {
+            if(event.keyCode == 123) {
+                return false;
+            }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){
+                return false;
+            }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){
+                return false;
+            }
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){
+                return false;
+            }
+        }
+        const canvas = document.querySelector('canvas')
+        const c = canvas.getContext('2d')
+
+        canvas.width = innerWidth
+        canvas.height = innerHeight
+
+        const mouse = {
+        x: innerWidth / 2,
+        y: innerHeight / 2
+        }
+
+        const colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66']
+
+        let mouseDown = false
+        addEventListener('mousedown', () => {
+        mouseDown = true
+        })
+
+        addEventListener('mouseup', () => {
+        mouseDown = false
+        })
+
+        addEventListener('resize', () => {
+        canvas.width = innerWidth
+        canvas.height = innerHeight
+
+        init()
+        })
+
+        // Objects
+        class Particle {
+        constructor(x, y, radius, color) {
+            this.x = x
+            this.y = y
+            this.radius = radius
+            this.color = color
+        }
+
+        draw() {
+            c.beginPath()
+            c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
+            c.shadowColor = this.color
+            c.shadowBlur = 15
+            c.fillStyle = this.color
+            c.fill()
+            c.closePath()
+        }
+
+        update() {
+            this.draw()
+        }
+        }
+
+        // Implementation
+        let particles
+        function init() {
+        particles = []
+
+        for (let i = 0; i < 1500; i++) {
+            const canvasWidth = canvas.width + 1000
+            const canvasHeight = canvas.height + 2000
+
+            const x = Math.random() * canvasWidth - canvasWidth / 2
+            const y = Math.random() * canvasHeight - canvasHeight / 2
+            const radius = 2 * Math.random()
+
+            const color = colors[Math.floor(Math.random() * colors.length)]
+            particles.push(new Particle(x, y, radius, color))
+        }
+        }
+
+        // Animation Loop
+        let radians = 0
+        let alpha = 1
+        function animate() {
+        requestAnimationFrame(animate)
+        c.fillStyle = `rgba(10, 10, 10, ${alpha})`
+        c.fillRect(0, 0, canvas.width, canvas.height)
+
+        c.save()
+        c.translate(canvas.width / 2, canvas.height / 2)
+        c.rotate(radians)
+        particles.forEach((particle) => {
+            particle.update()
+        })
+        c.restore()
+
+        radians += 0.001
+
+        if (mouseDown && alpha >= 0.03) {
+            alpha -= 0.01
+        } else if (!mouseDown && alpha < 1) {
+            alpha += 0.01
+        }
+        }
+
+        init()
+        animate()
+    </script>
+</body>
+</html>
