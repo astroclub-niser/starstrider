@@ -3,7 +3,7 @@ import json
 import time
 
 app = Flask(__name__)
-app.secret_key = "Zucc"
+app.secret_key = "secret"
 
 with open('static/questions.json', 'r') as file:
     questions = json.load(file)
@@ -46,7 +46,6 @@ def index():
     else:
         return redirect(url_for('login'))
 
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -62,30 +61,10 @@ def login():
 
     return render_template('login.html')
 
-
 @app.route('/logout')
 def logout():
     session.pop('team_name', None)
     flash('You have been logged out.', 'info')
     return redirect(url_for('login'))
-
-
-@app.route('/question/<int:question_id>', methods=['GET', 'POST'])
-def question(question_id):
-    question_data = questions[question_id]
-    if request.method == 'POST':
-        user_answer = (request.form.get('answer'))
-        correct_answer = question_data['answer']
-        if user_answer == correct_answer:
-            print(session)
-            team_name = session['team_name']
-            # update_score(team_name, stats_data.get(team_name, {}).get('score', 0) + 1)
-            update_stats(team_name, question_id+1) # The +1 is for changing the index to question number
-            return render_template('ans_correct.html')
-        else:
-            return render_template('ans_wrong.html')
-
-    return render_template('question.html', question_data=question_data)
-
 
 app.run(host = "0.0.0.0", debug=True)
