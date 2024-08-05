@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Happy B'day</title>
+  <link rel="shortcut icon" href="images/heart.png" type="image/png">
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <!-- CLOSE ICON -->
+  <div class="x-mark">
+    <div class="container">
+      <div class="left"></div>
+      <div class="right"></div>
+    </div>
+  </div>
+  <div class="intro-container">
+    <div class="container">
+      <h1>StarStrider:<br/><span>The Astro Treasure Hunt</span></h1>
+      <!-- <h2>Day 2</h2> -->
+      <h3>Enter Team Details</h3>
+      <form method="POST">
+          <div class="form-group">
+              <label for="team_name">Username:</label>
+              <input type="text" name="team-name" id="team-name" required>
+          </div>
+          <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" name="team-password" id="team-password" required>
+          </div>
+          <!-- <button type="submit" class="btn btn-primary">Login</button> -->
+      </form>
+  </div>
+    <!-- BUTTON TO SHIFT CAMERA -->
+    <div class="button shift-camera-button">
+      <div class="border">
+        <div class="left-plane"></div>
+        <div class="right-plane"></div>
+      </div>
+      <div class="text">Login</div>
+    </div>
+  </div>
+  <!-- STUFF AFTER CAMERA SHIFT -->
+  <div class="sky-container">
+    <div class="problems-list">
+      <ul>
+        <li class="problem-link" data-id="1">Problem 1</li>
+        <li class="problem-link" data-id="2">Problem 2</li>
+        <li class="problem-link" data-id="3">Problem 3</li>
+        <li class="problem-link" data-id="4">Problem 4</li>
+        <li class="problem-link" data-id="5">Problem 5</li>
+        <li class="problem-link" data-id="6">Problem 6</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="problem-container">
+
+    <h3>Problem <span id="problem-id"></span></h3>
+    <div class="problem problem-n">
+        <div class="problem-content">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint enim possimus magnam laudantium nobis suscipit animi corrupti quod reprehenderit at, ratione praesentium expedita officia ab? Vitae aliquam at quisquam repellendus.</p>
+          <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint enim possimus magnam laudantium nobis suscipit animi corrupti quod reprehenderit at, ratione praesentium expedita officia ab? Vitae aliquam at quisquam repellendus.</p>
+          <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint enim possimus magnam laudantium nobis suscipit animi corrupti quod reprehenderit at, ratione praesentium expedita officia ab? Vitae aliquam at quisquam repellendus.</p>
+
+          </div>
+      <input type="text" id="answer-input">
+        <div class="button submit-btn">
+          <div class="border">
+            <div class="left-plane"></div>
+            <div class="right-plane"></div>
+          </div>
+          <div class="text" id="answer-submit">Submit</div>
+        </div>
+    </div>
+
+    <div class="problem problem-n"></div>
+    <div class="problem problem-n"></div>
+    <div class="problem problem-n"></div>
+    <div class="problem problem-n"></div>
+    <div class="problem problem-n"></div>
+
+    </div>
+  </div>
+
+  <script src="js/jquery.js"></script>
+  <script src="js/tweenmax.js"></script>
+  <script src="js/three.js"></script>
+  <script src="js/index.js"></script>
+  <!-- <script src="js/app.js"></script> -->
+
+</body>
+</html>
